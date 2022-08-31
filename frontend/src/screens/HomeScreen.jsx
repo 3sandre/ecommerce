@@ -6,6 +6,9 @@ import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Product from '../components/Product';
+import { Helmet } from 'react-helmet-async';
+import Loading from '../components/Loading';
+import Message from '../components/Message';
 
 // import data from '../data';
 
@@ -45,12 +48,15 @@ function HomeScreen() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>elegance</title>
+      </Helmet>
       <h1>Featured Products</h1>
       <div className="products">
         {loading ? (
-          <div>Loading...</div>
+          <Loading />
         ) : error ? (
-          <div>{error}</div>
+          <Message variant="danger">{error}</Message>
         ) : (
           <Row>
             {products.map((product) => (

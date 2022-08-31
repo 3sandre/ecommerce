@@ -54,3 +54,6 @@ main {
 .img-large {
   max-width: 100%;
 }
+.img-img {
+  height: 80px;
+}
