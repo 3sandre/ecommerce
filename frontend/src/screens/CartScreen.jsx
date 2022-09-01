@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import { Store } from '../Store';
-import { axios } from 'axios';
+import axios from 'axios';
 
 export default function CartScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -27,7 +27,9 @@ export default function CartScreen() {
       payload: { ...item, quantity },
     });
   };
-
+  const removeItemHandler = (item) => {
+    ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+  };
   return (
     <div>
       <Helmet>
@@ -79,7 +81,10 @@ export default function CartScreen() {
                     </Col>
                     <Col md={3}>${item.price}</Col>
                     <Col md={2}>
-                      <Button variant="light">
+                      <Button
+                        onClick={() => removeItemHandler(item)}
+                        variant="light"
+                      >
                         <i className="fas fa-trash"></i>
                       </Button>
                     </Col>
